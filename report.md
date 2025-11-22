@@ -39,11 +39,9 @@ The goal of this project was to build machine learning models capable of **predi
 
 ## Data Preprocessing
 
-1. **Encoding**  
-   All categorical features were converted to numeric values using `LabelEncoder` to ensure compatibility with machine learning algorithms.
-
-2. **Standardization**  
-   Features were standardized using `StandardScaler` so that each feature has **mean = 0** and **variance = 1**. This is particularly important for models sensitive to feature scales such as SVC.
+**Encoding**  
+  Target variable was converted to numeric values using `LabelEncoder`.
+  All categorical features were converted into a binary format using One Hot Encoding.
 
 ---
 
@@ -65,21 +63,21 @@ Three machine learning models were trained and evaluated:
 
 ### 1️⃣ Training Performance
 
-| Model | Accuracy | Training Time |
-|-------|----------|---------------|
-| RF    | 100%     | ~17 seconds   |
-| Log Reg | 96.7%  | ~1.2 seconds  |
-| SVC   | 100%     | ~100 seconds  |
+| Model   | Accuracy | Training Time |
+|---------|----------|---------------|
+| RF      | 100%     | ~94.7 seconds |
+| Log Reg | 100%     | ~1.3 seconds  |
+| SVC     | 100%     | ~122 seconds  |
 
 ### 2️⃣ Test Performance
 
-| Model | Accuracy |
-|-------|----------|
-| RF    | 100%     |
-| Log Reg | 97.2%  |
-| SVC   | 100%     |
+| Model   | Accuracy |
+|---------|----------|
+| RF      | 100%     |
+| Log Reg | 100%     |
+| SVC     | 100%     |
 
-✅ The results indicate **no overfitting**, as training and test accuracies are nearly identical.
+✅ The results indicate **no overfitting**, as training and test accuracies are both 100%.
 
 ---
 
@@ -92,12 +90,28 @@ The **most important features** based on Random Forest feature_importances_ para
 3. `gill-size`  
 
 These features have the strongest influence on whether a mushroom is classified as edible or poisonous.
+The importance of these features was confirmed using chi-squared tests, which yielded extremely small p-values, indicating significant differences between edible and poisonous mushrooms.
+
+The diagram below illustrates the top 10 most important features.
+
+![Feature importances](diagrams/feature_importances.png)
+
+The most important feature in our dataset is odor, which shows a markedly different distribution between edible and poisonous mushrooms. Among edible mushrooms, the majority had no odor, while 9.5% exhibited almond and 9.5% anise odors. In contrast, over half of the poisonous mushrooms had a foul odor, with the remainder displaying fishy, spicy, or pungent odors, and only 3.1% had no odor. This clearly demonstrates the distinct odor patterns between the two groups. The following diagrams present these distributions as pie charts for visual comparison.
+
+![Odor](diagrams/odor_distribution.png)
+
+The second most important feature, Spore Print Color, also exhibits distinct distributions between edible and poisonous mushrooms. Among edible mushrooms, most are brown, black, or white, whereas in poisonous mushrooms, the majority are white, with notable proportions of chocolate, black, and brown as well. This highlights clear differences in spore print color between the two groups.
+
+Similarly, Gill Size shows different patterns between edible and poisonous mushrooms. For edible mushrooms, most have broad gills, with only 6.8% exhibiting narrow gills. In contrast, over half of the poisonous mushrooms have narrow gills, while fewer than half have broad gills. The following charts present these distributions for visual comparison.
+
+![Spore Print Color](diagrams/spore_print_distribution.png)
+
+![Gill size](diagrams/gill_distribution.png)
 
 ---
 
 ## Conclusion
 
 - The models successfully classify mushrooms as **edible or poisonous** with high accuracy.  
-- **Random Forest** and **SVC** achieved perfect accuracy, though SVC required significantly longer training time.  
-- **Logistic Regression** was slightly less accurate but very fast.  
+- **Logistic Regression** was very fast.  
 - Overall, this project demonstrates that mushroom edibility can be accurately predicted using physical features and standard machine learning techniques.

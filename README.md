@@ -12,11 +12,7 @@ It contains various categorical attributes of mushrooms and a target class indic
 
 ## Models Used
 
-**Logistic Regression (Linear Model)**
-
-Achieved an accuracy of 84.8% on the test data.
-
-**Support Vector Machine (SVM)**
+**Random Forest, Logistic Regression, SVM**
 
 Achieved an accuracy of 100% on the test data.
 
